@@ -1,0 +1,14 @@
+{
+  "name": "chatusb",
+  "productName": "ChatUSB",
+  "version": "1.0.0",
+  "description": "U盘便携聊天软件：跨网络聊天、QQ式截图、语音消息、图片与文件，所有数据保存在U盘本地",
+  "main": "main.js",
+  "author": "ChatUSB",
+  "license": "MIT",
+  "dependencies": {
+    "@xenova/transformers": "^2.17.2",
+    "mqtt": "^5.10.1",
+    "ws": "^8.18.0"
+  }
+}

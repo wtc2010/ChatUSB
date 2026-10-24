@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self'; script-src 'self'">
+<title>ChatUSB 便携聊天</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="bg-image"></div>
+<div id="titlebar">
+  <div id="tb-title"><span class="tb-dot"></span>ChatUSB</div>
+  <div id="tb-controls">
+    <button id="tb-lock" title="锁定（隐藏聊天内容）">🔒</button>
+    <button id="tb-min" title="最小化">—</button>
+    <button id="tb-max" title="最大化/还原">□</button>
+    <button id="tb-close" title="关闭">✕</button>
+  </div>
+</div>
+<div id="app">
+  <!-- 左侧栏 -->
+  <aside id="sidebar">
+    <div id="me-card">
+      <div id="me-avatar"></div>
+      <div id="me-name"></div>
+      <div id="me-uid"></div>
+    </div>
+    <nav id="tool-buttons">
+      <button id="btn-shot" title="截图（Ctrl+Shift+A）">✂ 截图</button>
+      <button id="btn-theme" title="切换日间/夜间模式">🌓 模式</button>
+      <button id="btn-settings" title="账号与设置">⚙ 设置</button>
+    </nav>
+    <button id="btn-notices" title="好友通知">🔔 好友通知<span id="notices-badge" class="badge hidden"></span></button>
+    <div id="friends-title">好友<span id="friends-cnt"></span></div>
+    <div id="friends-list"></div>
+    <button id="btn-add-friend">＋ 添加好友</button>
+    <div id="rooms-title">聊天房间</div>
+    <div id="rooms-list"></div>
+    <button id="btn-new-room">＋ 加入 / 创建房间</button>
+  </aside>
+
+  <!-- 主聊天区 -->
+  <main id="chat">
+    <header id="chat-header">
+      <div>
+        <div id="room-name"></div>
+        <div id="conn-state"><span class="dot"></span>未连接</div>
+      </div>
+      <div id="header-actions">
+        <span id="dnd-badge" class="hidden" title="离线模式：消息照常接收，但不提醒"></span>
+        <span id="online-count"></span>
+        <button id="btn-search" title="搜索聊天记录">🔍</button>
+        <button id="btn-lan" title="局域网直连模式">📡 局域网</button>
+      </div>
+    </header>
+    <div id="search-bar" class="hidden">
+      <input id="search-input" placeholder="搜索当前房间的聊天记录…" autocomplete="off">
+      <button id="search-close">×</button>
+      <div id="search-results"></div>
+    </div>
+
+    <div id="messages">
+      <div id="msg-placeholder">
+        <div class="ph-icon">💬</div>
+        <p>创建一个房间，或者输入房间号加入聊天。</p>
+        <p class="ph-sub">跨网络也能聊 · 数据全部保存在 U 盘</p>
+      </div>
+    </div>
+
+    <footer id="input-bar">
+      <div id="input-tools">
+        <button id="btn-attach" title="发送文件">📎</button>
+        <button id="btn-image" title="发送图片">🖼</button>
+        <button id="btn-emoji" title="表情 / 自定义表情">😊</button>
+        <button id="btn-multi" title="多选转发">☑</button>
+      </div>
+      <div id="emoji-panel" class="hidden">
+        <div id="emoji-grid"></div>
+        <div class="emoji-tools">
+          <button id="btn-add-sticker" title="把图片加入自定义表情">＋加表情</button>
+        </div>
+        <div id="sticker-row"></div>
+      </div>
+      <textarea id="input-text" rows="1" placeholder="输入消息，Enter 发送"></textarea>
+      <div id="voice-wrap">
+        <button id="btn-voice" title="按住说话（松开发送）">🎤</button>
+      </div>
+      <button id="btn-send">发送</button>
+    </footer>
+  </main>
+</div>
+
+<!-- 弹窗容器 -->
+<div id="modal-mask" class="hidden">
+  <div id="modal-box">
+    <h3 id="modal-title"></h3>
+    <div id="modal-body"></div>
+    <div id="modal-actions"></div>
+  </div>
+</div>
+
+<!-- 登录遮罩 -->
+<div id="forward-bar" class="hidden">
+  <span id="fwd-count">已选 0 条</span>
+  <button id="btn-fwd" class="primary">转发…</button>
+  <button id="btn-fwd-cancel">取消</button>
+</div>
+<div id="fwd-modal" class="hidden">
+  <div id="fwd-modal-box">
+    <div id="fwd-modal-title">转发到房间</div>
+    <div id="fwd-room-list"></div>
+    <button id="fwd-modal-close">关闭</button>
+  </div>
+</div>
+<div id="login-screen" class="hidden">
+  <div id="login-box">
+    <div id="login-logo">💬</div>
+    <h2 id="login-title">ChatUSB</h2>
+    <p id="login-sub">便携聊天 · 数据全部保存在 U 盘</p>
+    <div id="login-mode-register" style="display:none">
+      <div class="l-row"><input type="text" id="lg-account" placeholder="QQ 邮箱 或 手机号" autocomplete="off"></div>
+      <div class="l-row"><input type="password" id="lg-pwd" placeholder="设置密码（至少 6 位）"></div>
+      <div class="l-row"><input type="password" id="lg-pwd2" placeholder="确认密码"></div>
+      <button id="lg-register-btn" class="primary">注册并进入</button>
+      <p class="l-tip">账号只保存在本 U 盘，换 U 盘需重新注册</p>
+    </div>
+    <div id="login-mode-login">
+      <div class="l-row"><input type="text" id="lg-login-account" placeholder="QQ 邮箱 或 手机号" autocomplete="off"></div>
+      <div class="l-row"><input type="password" id="lg-login-pwd" placeholder="请输入密码"></div>
+      <button id="lg-login-btn" class="primary">登录</button>
+      <div class="l-row"><label class="l-check"><input type="checkbox" id="lg-remember"> 记住登录（下次直接进入，不输密码）</label></div>
+      <p class="l-tip"><a href="#" id="lg-reset">忘了密码？重新设置账号</a></p>
+    </div>
+    <p id="lg-error" class="l-err"></p>
+  </div>
+</div>
+
+<input type="file" id="file-input" multiple hidden>
+<input type="file" id="image-input" accept="image/*" hidden>
+<input type="file" id="sticker-input" accept="image/*" hidden>
+
+<script src="app.js"></script>
+</body>
+</html>

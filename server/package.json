@@ -1,0 +1,14 @@
+{
+  "name": "chatusb-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ChatUSB 自建中央服务器（MQTT over WebSocket）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "aedes": "^0.51.0",
+    "ws": "^8.18.0"
+  }
+}
