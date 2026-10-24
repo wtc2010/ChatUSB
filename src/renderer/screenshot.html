@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; script-src 'self'">
+<title>截图</title>
+<link rel="stylesheet" href="screenshot.css">
+</head>
+<body>
+<canvas id="stage"></canvas>
+<div id="tipbar">按住鼠标左键拖拽框选截图区域 · Esc 取消</div>
+<div id="toolbar" class="hidden">
+  <button data-tool="pen" class="active" title="画笔">✏</button>
+  <button data-tool="rect" title="矩形">▭</button>
+  <button data-tool="arrow" title="箭头">➜</button>
+  <button data-tool="text" title="文字">T</button>
+  <span class="sep"></span>
+  <span class="colors">
+    <i data-c="#f5222d" style="background:#f5222d" class="sel"></i>
+    <i data-c="#fa8c16" style="background:#fa8c16"></i>
+    <i data-c="#1677ff" style="background:#1677ff"></i>
+    <i data-c="#52c41a" style="background:#52c41a"></i>
+    <i data-c="#000000" style="background:#000"></i>
+    <i data-c="#ffffff" style="background:#fff; border:1px solid #ccc"></i>
+  </span>
+  <span class="sep"></span>
+  <button id="btn-size-s" title="细">细</button>
+  <button id="btn-size-m" class="sel" title="中">中</button>
+  <button id="btn-size-l" title="粗">粗</button>
+  <span class="sep"></span>
+  <button id="btn-undo" title="撤销">↶</button>
+  <button id="btn-redo" title="重新框选">⤢</button>
+  <span class="sep"></span>
+  <button id="btn-cancel">取消</button>
+  <button id="btn-save">保存</button>
+  <button id="btn-send" class="primary">发送 ✓</button>
+</div>
+<div id="text-input-wrap" class="hidden"><textarea id="text-input" placeholder="输入文字，Enter 确认"></textarea></div>
+<script src="screenshot.js"></script>
+</body>
+</html>
