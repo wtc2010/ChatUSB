@@ -1,0 +1,39 @@
+html, body { margin: 0; padding: 0; overflow: hidden; background: transparent; cursor: crosshair; }
+#stage { position: fixed; inset: 0; width: 100vw; height: 100vh; }
+#tipbar {
+  position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,.72); color: #fff; font-size: 13px;
+  padding: 7px 16px; border-radius: 18px; z-index: 10; pointer-events: none;
+  font-family: "Microsoft YaHei", system-ui, sans-serif;
+}
+#toolbar {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  background: rgba(28,31,35,.92); color: #fff; z-index: 20;
+  display: flex; align-items: center; gap: 4px;
+  padding: 6px 10px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,.35);
+  font-family: "Microsoft YaHei", system-ui, sans-serif;
+}
+#toolbar.hidden { display: none; }
+#toolbar button {
+  background: none; border: none; color: #e8e8e8; font-size: 16px;
+  padding: 6px 9px; border-radius: 7px; cursor: pointer; font-family: inherit;
+}
+#toolbar button:hover { background: rgba(255,255,255,.14); }
+#toolbar button.active { background: #3370ff; color: #fff; }
+#toolbar button.primary { background: #3370ff; color: #fff; font-size: 13px; padding: 6px 14px; }
+#toolbar button#btn-cancel, #toolbar button#btn-save { font-size: 13px; }
+#toolbar .sep { width: 1px; height: 20px; background: rgba(255,255,255,.2); margin: 0 4px; }
+#toolbar .colors { display: flex; gap: 5px; align-items: center; }
+#toolbar .colors i {
+  width: 18px; height: 18px; border-radius: 50%; cursor: pointer; display: inline-block;
+}
+#toolbar .colors i.sel { outline: 2px solid #fff; outline-offset: 1px; }
+#toolbar button.sel { background: rgba(255,255,255,.18); }
+#text-input-wrap { position: fixed; z-index: 30; }
+#text-input-wrap.hidden { display: none; }
+#text-input {
+  border: 2px solid #3370ff; outline: none; background: rgba(0,0,0,.65);
+  color: #fff; font-size: 22px; padding: 4px 6px; resize: none;
+  border-radius: 4px; font-family: "Microsoft YaHei", system-ui, sans-serif;
+  min-width: 120px; min-height: 34px;
+}
